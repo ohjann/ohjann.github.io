@@ -1,0 +1,128 @@
+/* ============================================
+   Decorative font
+   ============================================ */
+
+@font-face {
+	font-family: 'Yarndings 12 Charted';
+	font-style: normal;
+	font-weight: 400;
+	font-display: block;
+	src: url('/fonts/Yarndings12Charted.ttf') format('truetype');
+}
+
+/* ============================================
+   THE MAXIMALIST AUTHORITY — Design Tokens
+   ============================================ */
+
+:root {
+	/* Colors: High-Octane Contrast */
+	--primary: #00327d;
+	--primary-container: #0047ab;
+	--on-primary: #ffffff;
+	--secondary: #705d00;
+	--secondary-container: #fcd400;
+	--on-secondary-container: #6e5c00;
+	--secondary-fixed: #ffe16d;
+	--tertiary-container: #a00100;
+	--on-tertiary-container: #ffffff;
+	--surface: #f9f9f9;
+	--surface-container-lowest: #ffffff;
+	--surface-container-low: #f3f3f3;
+	--surface-container: #ededee;
+	--surface-container-high: #e7e7e8;
+	--surface-container-highest: #e2e2e2;
+	--on-surface: #1b1b1b;
+	--on-surface-variant: #44474f;
+	--outline-variant: #c3c6d5;
+
+	/* Typography */
+	--font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+	/* Spacing */
+	--sp-1: 0.25rem;
+	--sp-2: 0.5rem;
+	--sp-3: 0.65rem;
+	--sp-4: 0.9rem;
+	--sp-5: 1.1rem;
+	--sp-6: 1.35rem;
+	--sp-8: 1.8rem;
+	--sp-10: 2.25rem;
+	--sp-12: 2.7rem;
+	--sp-16: 3.6rem;
+	--sp-20: 4.5rem;
+	--sp-24: 5.4rem;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+
+*, *::before, *::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+	background: var(--on-surface);
+	color: var(--on-primary);
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+/* ============================================
+   Typography Scale
+   ============================================ */
+
+.display-lg {
+	font-family: var(--font-display);
+	font-size: clamp(3rem, 8vw, 6rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.05;
+}
+
+.display-md {
+	font-family: var(--font-display);
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+}
+
+.headline-sm {
+	font-family: var(--font-display);
+	font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+}
+
+.body-lg {
+	font-family: var(--font-body);
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.6;
+}
+
+.label-md {
+	font-family: var(--font-body);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
