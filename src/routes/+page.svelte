@@ -10,7 +10,6 @@
 	});
 
 	let mounted = $state(false);
-	let line1: HTMLElement;
 	let line2: HTMLElement;
 
 	const canvas = typeof document !== 'undefined' ? document.createElement('canvas') : null;
@@ -35,7 +34,6 @@
 	}
 
 	function fitAll() {
-		fitLine(line1);
 		fitLine(line2);
 	}
 
@@ -60,7 +58,7 @@
 
 <div class="shell" class:mounted>
 	<h1 class="name">
-		<span class="name-line" bind:this={line1}>EOGHAN</span>
+		<img class="name-svg" src="/eoghan.svg" alt="Eoghan" />
 		<span class="name-line" bind:this={line2}>HYNES</span>
 	</h1>
 
@@ -87,8 +85,7 @@
 
 <style>
 	.shell {
-		height: 100vh;
-		height: 100dvh;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
@@ -116,6 +113,12 @@
 		justify-content: center;
 	}
 
+	.name-svg {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
 	.name-line {
 		display: block;
 		font-family: var(--font-display);
@@ -124,10 +127,6 @@
 		line-height: 0.88;
 		white-space: nowrap;
 		width: 100%;
-		font-size: 24vw;
-	}
-
-	.name-line:last-child {
 		font-size: 30vw;
 	}
 
