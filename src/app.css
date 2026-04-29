@@ -1,0 +1,256 @@
+/* ============================================
+   Decorative font
+   ============================================ */
+
+@font-face {
+  font-family: 'Yarndings 12 Charted';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/Yarndings12Charted.ttf') format('truetype');
+}
+
+/* ============================================
+   THE MAXIMALIST AUTHORITY — Design Tokens
+   ============================================ */
+
+:root {
+  /* Colors: High-Octane Contrast */
+  --primary: #00327d;
+  --primary-container: #0047ab;
+  --on-primary: #ffffff;
+  --secondary: #705d00;
+  --secondary-container: #fcd400;
+  --on-secondary-container: #6e5c00;
+  --secondary-fixed: #ffe16d;
+  --tertiary-container: #a00100;
+  --on-tertiary-container: #ffffff;
+  --surface: #f9f9f9;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f3f3;
+  --surface-container: #ededee;
+  --surface-container-high: #e7e7e8;
+  --surface-container-highest: #e2e2e2;
+  --on-surface: #2d2d2d;
+  --on-surface-variant: #44474f;
+  --outline-variant: #c3c6d5;
+
+  /* Typography */
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.65rem;
+  --sp-4: 0.9rem;
+  --sp-5: 1.1rem;
+  --sp-6: 1.35rem;
+  --sp-8: 1.8rem;
+  --sp-10: 2.25rem;
+  --sp-12: 2.7rem;
+  --sp-16: 3.6rem;
+  --sp-20: 4.5rem;
+  --sp-24: 5.4rem;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--on-surface);
+  color: var(--on-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  border: 3em solid #000;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   Ornamental page frame
+   ============================================ */
+
+:root {
+  /* must match body border width below */
+  --frame-border: 3em;
+  /* strip thickness (can be < --frame-border; strip is centered in the border) */
+  --frame-strip: 2em;
+  /* offset from the page edge so the strip sits centered inside the border */
+  --frame-strip-offset: calc((var(--frame-border) - var(--frame-strip)) / 2);
+  /* corner SVG is 990×718, strip SVG is 1247×329 — same 329-unit band;
+     scale both so the 329 band maps to --frame-strip.
+     corner rendered size = (990/329 × --frame-strip) × (718/329 × --frame-strip) */
+  --frame-corner-w: calc(var(--frame-strip) * 900 / 329);
+  --frame-corner-h: calc(var(--frame-strip) * 718 / 329);
+  /* how much each tile overlaps its neighbour — tune to hide the diagonal seam */
+  --tile-overlap: 0em;
+}
+
+.page-frame {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.page-frame .corner {
+  position: absolute;
+  display: block;
+  width: var(--frame-corner-w);
+  height: var(--frame-corner-h);
+  background: url('/border-corner.svg') center / 100% 100% no-repeat;
+  z-index: 2;
+}
+
+.page-frame .corner.tl {
+  top: var(--frame-strip-offset);
+  left: var(--frame-strip-offset);
+}
+
+.page-frame .corner.tr {
+  top: var(--frame-strip-offset);
+  right: var(--frame-strip-offset);
+  transform: scaleX(-1);
+}
+
+.page-frame .corner.bl {
+  bottom: var(--frame-strip-offset);
+  left: var(--frame-strip-offset);
+  transform: scaleY(-1);
+}
+
+.page-frame .corner.br {
+  bottom: var(--frame-strip-offset);
+  right: var(--frame-strip-offset);
+  transform: scale(-1, -1);
+}
+
+.page-frame .edge {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.page-frame .edge.top,
+.page-frame .edge.bottom {
+  left: 0;
+  right: 0;
+  height: var(--frame-strip);
+  display: flex;
+  align-items: center;
+}
+
+.page-frame .edge.top {
+  top: var(--frame-strip-offset);
+}
+
+.page-frame .edge.bottom {
+  bottom: var(--frame-strip-offset);
+  transform: scaleY(-1);
+}
+
+.page-frame .edge.left,
+.page-frame .edge.right {
+  top: 0;
+  bottom: 0;
+  width: var(--frame-strip);
+}
+
+.page-frame .edge.left {
+  left: var(--frame-strip-offset);
+}
+
+.page-frame .edge.right {
+  right: var(--frame-strip-offset);
+  transform: scaleX(-1);
+}
+
+.page-frame .edge-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100dvh;
+  height: var(--frame-strip);
+  transform-origin: 0 0;
+  transform: translateX(var(--frame-strip)) rotate(90deg);
+  display: flex;
+  align-items: center;
+}
+
+.page-frame .tile {
+  display: block;
+  height: 100%;
+  width: auto;
+  flex-shrink: 0;
+  margin-right: calc(-1 * var(--tile-overlap));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ============================================
+   Typography Scale
+   ============================================ */
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.headline-sm {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.body-lg {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.label-md {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
